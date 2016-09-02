@@ -29,6 +29,6 @@ namespace SysComm
 
 	Database::Database(const std::string &name)
 	{
-		mInternal = Reference<DatabaseInternal>::create(name);
+		mInternal = Reference<DatabaseInternal>::create(name, this);
 	}
 }

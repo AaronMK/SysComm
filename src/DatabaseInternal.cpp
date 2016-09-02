@@ -38,7 +38,7 @@ namespace SysComm
 
 	//////////////////////////////////////////////////////
 
-	DatabaseInternal::DatabaseInternal(const std::string &name)
+	DatabaseInternal::DatabaseInternal(const std::string &name, Database* parent)
 	{
 		acquireSqlite();
 
@@ -52,6 +52,11 @@ namespace SysComm
 				"description STRING, value BLOB)",
 				nullptr, nullptr, nullptr);
 		}
+
+		mConnectionPool.init([parent]() -> DatabaseConnection
+			{
+				return DatabaseConnection(parent);
+			});
 	}
 
 	DatabaseInternal::~DatabaseInternal()

@@ -2,8 +2,12 @@
 #define _SYS_COMM_DATABASE_INTERNAL_H_
 
 #include <SysComm/Config.h>
-
 #include "../private_include/sqlite3/sqlite3.h"
+
+
+#include "DatabaseConnection.h"
+
+#include <Concurrent/ObjectPool.h>
 
 #include <string>
 
@@ -15,7 +19,7 @@ namespace SysComm
 	class DatabaseInternal
 	{
 	public:
-		DatabaseInternal(const std::string &name);
+		DatabaseInternal(const std::string &name, Database* parent);
 		virtual ~DatabaseInternal();
 
 		/**
@@ -29,6 +33,8 @@ namespace SysComm
 		 *  The handle to the database.
 		 */
 		sqlite3* mDatabase;
+
+		Concurrent::ObjectPool<DatabaseConnection> mConnectionPool;
 	};
 }
 
