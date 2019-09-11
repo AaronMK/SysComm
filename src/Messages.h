@@ -15,7 +15,7 @@ namespace SysComm
 	struct NodeEndpoint
 	{
 		StdExt::UID::uid_t Tag;
-		IpComm::IpEndpoint IP;
+		IpComm::IpEndPoint IP;
 
 		NodeEndpoint() noexcept;
 
